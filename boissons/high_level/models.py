@@ -30,7 +30,7 @@ class UtilisationMatierePremiere(QuantiteMatierePremiere):
 
 
 class Localisation(models.Model):
-    nom = models.IntegerField()
+    nom = models.CharField(max_length=100)
     taxes = models.IntegerField()
     prix_m2 = models.IntegerField()
 
