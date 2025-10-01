@@ -13,7 +13,7 @@ class MatierePremiere(models.Model):
     def __str__(self):
         return self.no
     def toJSON(self):
-    return json.dumps(self, default=lambda o: o.__dict__)
+        return json.dumps(self, default=lambda o: o.__dict__)
 
 class QuantiteMatierePremiere(models.Model):
     quantite = models.IntegerField()
@@ -22,7 +22,7 @@ class QuantiteMatierePremiere(models.Model):
         on_delete=models.PROTECT,
     )
     def toJSON(self):
-    return json.dumps(self, default=lambda o: o.__dict__)
+        return json.dumps(self, default=lambda o: o.__dict__)
 
 
     class Meta:
@@ -42,7 +42,7 @@ class Localisation(models.Model):
     def __str__(self):
         return self.nom
     def toJSON(self):
-    return json.dumps(self, default=lambda o: o.__dict__)
+        return json.dumps(self, default=lambda o: o.__dict__)
 
 
 class ApprovisionnementMatierePremiere(QuantiteMatierePremiere):
@@ -58,7 +58,7 @@ class ApprovisionnementMatierePremiere(QuantiteMatierePremiere):
     def costs(self):
         return self.quantite * self.prix_unitaire
     def toJSON(self):
-    return json.dumps(self, default=lambda o: o.__dict__)
+        return json.dumps(self, default=lambda o: o.__dict__)
     
 
 
@@ -76,7 +76,7 @@ class Local(models.Model):
         return self.surface * self.localisation.prix_m2 
     def json(self)
     def toJSON(self):
-    return json.dumps(self, default=lambda o: o.__dict__)
+        return json.dumps(self, default=lambda o: o.__dict__)
     
 
 
@@ -100,7 +100,7 @@ class Produit(models.Model):
             "local": self.quantite,
         }
     def toJSON(self):
-    return json.dumps(self, default=lambda o: o.__dict__)
+        return json.dumps(self, default=lambda o: o.__dict__)
 
 
 class Energie(models.Model):
@@ -114,7 +114,7 @@ class Energie(models.Model):
     def __str__(self):
         return self.nom
     def toJSON(self):
-    return json.dumps(self, default=lambda o: o.__dict__)
+        return json.dumps(self, default=lambda o: o.__dict__)
 
 
 class DebitEnergie(models.Model):
@@ -129,7 +129,7 @@ class DebitEnergie(models.Model):
     def costs(self):
         return self.debit * self.energie.prix
     def toJSON(self):
-    return json.dumps(self, default=lambda o: o.__dict__)
+        return json.dumps(self, default=lambda o: o.__dict__)
 
 
 class Metier(models.Model):
@@ -139,7 +139,7 @@ class Metier(models.Model):
     def __str__(self):
         return self.nom
     def toJSON(self):
-    return json.dumps(self, default=lambda o: o.__dict__)
+        return json.dumps(self, default=lambda o: o.__dict__)
 
 
 class RessourceHumaine(models.Model):
@@ -156,7 +156,7 @@ class RessourceHumaine(models.Model):
         return self.quantite * self.metier.remuneration
     
     def toJSON(self):
-    return json.dumps(self, default=lambda o: o.__dict__)
+        return json.dumps(self, default=lambda o: o.__dict__)
 
 
 class Machine(models.Model):
@@ -181,7 +181,7 @@ class Machine(models.Model):
     def costs(self):
         return self.prix_achat + self.cout_maintenance + self.debit_energie.costs()
     def toJSON(self):
-    return json.dumps(self, default=lambda o: o.__dict__)
+        return json.dumps(self, default=lambda o: o.__dict__)
 
 
 class Fabrication(models.Model):
@@ -196,4 +196,4 @@ class Fabrication(models.Model):
     def __str__(self):
         return self.produit
     def toJSON(self):
-    return json.dumps(self, default=lambda o: o.__dict__)
+        return json.dumps(self, default=lambda o: o.__dict__)
