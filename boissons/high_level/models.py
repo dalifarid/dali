@@ -6,8 +6,8 @@ from django.db import models
 
 
 class MatierePremiere(models.Model):
-    nom = models.IntegerField()
-    stock = models.IntegerField()
+    nom = models.CharField(max_length=100)
+    stock = models.CharField(max_length=100)
     emprise = models.IntegerField()
 
     def __str__(self):
