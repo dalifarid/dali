@@ -48,6 +48,8 @@ class ApprovisionnementMatierePremiere(QuantiteMatierePremiere):
 
     def __str__(self):
         return self.localisation
+    def costs(self):
+        return self.quantite * self.prix_unitaire
 
 
 class Local(models.Model):
@@ -60,6 +62,8 @@ class Local(models.Model):
 
     def __str__(self):
         return self.nom
+    def costs(self):
+        return self.surface * self.localisation.prix_m2 + self.localisation.taxes
 
 
 class Produit(models.Model):
@@ -97,6 +101,8 @@ class DebitEnergie(models.Model):
 
     def __str__(self):
         return self.debit
+    def costs(self):
+        return self.debit * self.energie.prix
 
 
 class Metier(models.Model):
@@ -115,7 +121,10 @@ class RessourceHumaine(models.Model):
     quantite = models.IntegerField()
 
     def __str__(self):
-        return self.nom
+        return f"{self.quantite} x {self.metier.nom}"
+
+    def costs(self):
+        return self.quantite * self.metier.remuneration
 
 
 class Machine(models.Model):
@@ -137,6 +146,8 @@ class Machine(models.Model):
 
     def __str__(self):
         return self.nom
+    def costs(self):
+        return self.prix_achat + self.cout_maintenance + self.debit_energie.costs()
 
 
 class Fabrication(models.Model):
