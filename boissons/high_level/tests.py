@@ -17,12 +17,10 @@ class CostsTestCase(TestCase):
     def setUp(self):
         # Création de la localisation
         self.labege = Localisation.objects.create(nom="Labège", taxes=0, prix_m2=2000)
-
         # Création du local
         self.local = Local.objects.create(nom="LocalTest", localisation=self.labege, surface=50)
-
         # Machines
-        energie = Energie.objects.create(nom="Electricité", prix=0)  # prix=0 pour simplifier
+        energie = Energie.objects.create(nom="Electricité", prix=0, localisation=self.labege)  # localisation ajoutée
         debit = DebitEnergie.objects.create(debit=0, energie=energie)
         self.machine1 = Machine.objects.create(
             nom="Machine1", prix_achat=1000, cout_maintenance=0,
@@ -34,7 +32,6 @@ class CostsTestCase(TestCase):
             debit=0, surface=0, debit_energie=debit,
             taux_utilisation=0, local=self.local
         )
-
         # Matière première
         sucre = MatierePremiere.objects.create(nom="Sucre", stock=1000, emprise=0)
         eau = MatierePremiere.objects.create(nom="Eau", stock=50, emprise=0)
@@ -53,3 +50,4 @@ class CostsTestCase(TestCase):
         # Ici on additionne Local + Machines + Stock
         local_cost = self.local.costs()
         self.assertEqual(local_cost, expected)
+
